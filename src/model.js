@@ -17,27 +17,32 @@ export class Human extends Model {
 
 // TODO: Human.init()
 Human.init({
-  humanId: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
+    humanId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
 
-  fname: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+    fname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
-  lname: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+    lname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  },
+  {
+    modelName: 'human',
+    sequelize: db
   }
-});
+);
 
 export class Animal extends Model {
   [util.inspect.custom]() {
@@ -47,27 +52,32 @@ export class Animal extends Model {
 
 // TODO: Animal.init()
 Animal.init({
-  animalId: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
-  },
+    animalId: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
 
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
-  species: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
+    species: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
-  birthYear: {
-    type: DataTypes.INTEGER,
-    // allowNull defaults to true
-  }
-});
+    birthYear: {
+      type: DataTypes.INTEGER,
+      // allowNull defaults to true
+    }
+  },
+  {
+    modelName: 'animal',
+    sequelize: db
+  } 
+);
 
 
 
