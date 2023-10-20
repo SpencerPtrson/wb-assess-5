@@ -1,5 +1,6 @@
 import { Op } from 'sequelize';
 import { Animal, Human } from './model.js';
+// const { Animal, Human } = await import('./src/model.js'); // Used for node testing
 
 // Get the human with the primary key 2
 export const query1 = Human.findByPk(2);
@@ -40,15 +41,13 @@ export const query8 = Human.findAll({
 });
 
 // Continue reading the instructions before you move on!
-
 // Print a directory of humans and their animals
 export async function printHumansAndAnimals() {
-    const humans = await Human.findAll({ include: Animal});
-    humans.forEach(async human => {
-        const fullName = await human.getFullName();
-        console.log(fullName);
+    const humans = await Human.findAll({ include: Animal }); // Get a list of humans with animal data included
+    humans.forEach(async human => { // for every human, do this code
+        console.log(human.getFullName()); // Print out full name
         human.animals.forEach(animal => {
-            console.log(`-- ${animal.name}, ${animal.species}`);
+            console.log(`-- ${animal.name}, ${animal.species}`); // Print out animal name + species
         })
     })
 }
@@ -56,13 +55,14 @@ export async function printHumansAndAnimals() {
 // Return a Set containing the full names of all humans
 // with animals of the given species.
 export async function getHumansByAnimalSpecies(species) {
-    const humans = new Set();
-    const pets = await Animal.findAll({
+    const humans = new Set(); // Create new set of Humans
+    const pets = await Animal.findAll({ // Find all animals who have a matching species, and include their owners
         include: Human,
         where: { species: species}
-    })
-    pets.forEach(async pet => {
-        humans.add(await pet.human.getFullName());
-    })
+    });
+    pets.forEach(pet => { // for every pet
+        humans.add(pet.human.getFullName()); // add the owner's full name to the set
+    });
+    console.log(humans);
     return humans;
 }
